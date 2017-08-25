@@ -1,0 +1,24 @@
+# IntelliJ IDEA
+.idea/*
+!.idea/fileTemplates/
+
+*.iml
+*.ipr
+*.iws
+classes/
+
+
+# Gradle
+.gradle/
+build/
+bin/
+
+#ant and other
+local.properties
+.DS_Store
+*~
+*.swp
+
+src/main/res/values/com_crashlytics_export_strings.xml
+
+.phraseapp.yml
