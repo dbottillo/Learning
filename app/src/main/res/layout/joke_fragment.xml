@@ -12,10 +12,34 @@
         android:text="Joke"
         android:textSize="20sp"/>
 
-    <Button
-        android:id="@+id/another"
+    <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="Another joke"/>
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/another"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Joke"/>
+
+        <Button
+            android:id="@+id/stop"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Stop"/>
+
+        <Button
+            android:id="@+id/start"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Start"/>
+
+        <Button
+            android:id="@+id/error"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Error"/>
+    </LinearLayout>
 
 </LinearLayout>

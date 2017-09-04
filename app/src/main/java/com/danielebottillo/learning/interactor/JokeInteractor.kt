@@ -2,7 +2,7 @@ package com.danielebottillo.learning.interactor
 
 import com.danielebottillo.learning.model.Joke
 import com.danielebottillo.learning.repository.JokeRepository
-import io.reactivex.functions.Consumer
+import io.reactivex.subjects.Subject
 
 class JokeInteractor {
 
@@ -10,7 +10,11 @@ class JokeInteractor {
         JokeRepository.instance.getJoke()
     }
 
-    fun subscribe(consumer: Consumer<Joke>) {
-        JokeRepository.instance.getSubject().subscribe(consumer)
+    fun subscribe(): Subject<Joke> {
+        return JokeRepository.instance.getSubject()
+    }
+
+    fun generateError() {
+        JokeRepository.instance.generateError()
     }
 }

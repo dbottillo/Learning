@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.danielebottillo.learning.R
 import com.danielebottillo.learning.interactor.JokeInteractor
 import com.danielebottillo.learning.model.Joke
+import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 
 class BottomFragment : Fragment() {
@@ -19,6 +20,8 @@ class BottomFragment : Fragment() {
     }
 
     val text: TextView by lazy { view!!.findViewById<TextView>(R.id.joke) }
+
+    var disposable: Disposable? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -31,13 +34,33 @@ class BottomFragment : Fragment() {
         view?.findViewById<Button>(R.id.another)?.setOnClickListener {
             interactor.getJoke()
         }
+
+        view?.findViewById<Button>(R.id.stop)?.setOnClickListener {
+            disposable?.dispose()
+        }
+
+        view?.findViewById<Button>(R.id.start)?.setOnClickListener {
+            subscribe()
+        }
+
+        view?.findViewById<Button>(R.id.error)?.setOnClickListener {
+            interactor.generateError()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        interactor.subscribe(Consumer<Joke> {
+        subscribe()
+    }
+
+    fun subscribe() {
+        disposable = interactor.subscribe().subscribe({
+            text.setTextColor(resources.getColor(android.R.color.black))
             text.text = it.text
+        }, {
+            text.setTextColor(resources.getColor(android.R.color.holo_red_dark))
+            text.text = it.localizedMessage
         })
     }
 
